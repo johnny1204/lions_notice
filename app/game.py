@@ -14,8 +14,8 @@ class Game:
   def live(self):
     soup = BeautifulSoup(requests.get('http://npb.jp' + self.target.parent.get('href')).content, 'html.parser')
     score_board = soup.select("#table_linescore")[0]
-    # if soup.select('.game_info')[0].text.replace("\n", " ").find("試合終了") > -1:
-    #   return "試合終了"
+    if soup.select('.game_info')[0].text.replace("\n", " ").find("試合終了") > -1:
+      return "試合終了"
     team = {}
     for span in score_board.select('th > span'):
       scores = self.scores(span)

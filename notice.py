@@ -10,19 +10,9 @@ path = "gameisover.txt"
 def get_game_info():
   game = Game()
   live = game.live()
-  if isinstance(live, dict):
-    if live['lions']['inning'] == live['opponent']['inning']:
-      inning = '裏'
-    elif live['lions']['inning'] > live['opponent']['inning']:
-      inning = '表'
-
-    info = '現在' + str(live['lions']['inning']) + '回' + inning + ' ' + \
-  live['lions']['total_score'] + '-' + live['opponent']['total_score'] + '\n' + \
-  str(live['lions']['inning']) + '回の得点' + str(live['lions']['inning_score']) + '点'
-    return jsonify(info)
-  else:
+  if isinstance(live, str):
     open(path, "w")
-    return jsonify(live)
+  return jsonify({ "result": live })
   
 @api.route('/notice/', methods=['GET'])
 def notice():
