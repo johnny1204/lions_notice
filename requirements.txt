@@ -8,6 +8,7 @@ cssselect==1.0.1
 cx-Freeze==5.1
 Flask==0.12.2
 future==0.16.0
+gunicorn==19.7.1
 idna==2.6
 isort==4.3.4
 itsdangerous==0.24
