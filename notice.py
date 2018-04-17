@@ -32,3 +32,6 @@ def notice():
       get_game_info()
   else:
     get_game_info()
+
+if __name__ == '__main__':
+  api.run()
