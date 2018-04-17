@@ -2,6 +2,7 @@ from app.game import Game
 import os
 import time
 from datetime import datetime
+from flask import Flask, jsonify, abort, make_response
 
 path = "gameisover.txt"
 
@@ -22,9 +23,11 @@ def get_game_info():
     open(path, "w")
     print(live)
   
-if os.path.exists(path):
-  if datetime(*time.localtime(os.path.getctime(path))[:6]) < datetime.now():
-    os.remove(path)
+@api.route('/notice/', methods=['GET'])
+def notice():
+  if os.path.exists(path):
+    if datetime(*time.localtime(os.path.getctime(path))[:6]) < datetime.now():
+      os.remove(path)
+      get_game_info()
+  else:
     get_game_info()
-else:
-  get_game_info()
