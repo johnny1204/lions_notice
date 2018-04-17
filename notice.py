@@ -4,6 +4,7 @@ import time
 from datetime import datetime
 from flask import Flask, jsonify, abort, make_response
 
+api = Flask(__name__)
 path = "gameisover.txt"
 
 def get_game_info():
