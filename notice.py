@@ -19,19 +19,19 @@ def get_game_info():
     info = '現在' + str(live['lions']['inning']) + '回' + inning + ' ' + \
   live['lions']['total_score'] + '-' + live['opponent']['total_score'] + '\n' + \
   str(live['lions']['inning']) + '回の得点' + str(live['lions']['inning_score']) + '点'
-    print(info)
+    return jsonify(info)
   else:
     open(path, "w")
-    print(live)
+    return jsonify(live)
   
 @api.route('/notice/', methods=['GET'])
 def notice():
   if os.path.exists(path):
     if datetime(*time.localtime(os.path.getctime(path))[:6]) < datetime.now():
       os.remove(path)
-      get_game_info()
+      return get_game_info()
   else:
-    get_game_info()
+    return get_game_info()
 
 if __name__ == '__main__':
-  api.run()
+  api.run(debug=True)
